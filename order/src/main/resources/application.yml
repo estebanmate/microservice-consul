@@ -1,9 +1,8 @@
 server:
    port: 8085
-
-management:
-   security:
-      enabled: false
       
 logging:
-   file: /logs/order-json.log      
+   file: /logs/order-json.log
+   
+vars:
+   testkey: 555678   

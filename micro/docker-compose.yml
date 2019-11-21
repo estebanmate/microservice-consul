@@ -13,7 +13,7 @@ services:
       - 27017:27017
     networks:
       - mynetwork
-    command: mongod --smallfiles --logpath=/dev/null # --quiet
+    command: mongod --logpath=/dev/null # --quiet
 
   consul:
     image: consul:latest
@@ -27,7 +27,7 @@ services:
     restart: always
     build: 
       context: ../gateway
-      dockerfile: Dockerfile
+      dockerfile: DockerFile
     networks:
       - mynetwork
     volumes:
@@ -42,7 +42,7 @@ services:
     restart: always
     build: 
       context: ../student
-      dockerfile: Dockerfile
+      dockerfile: DockerFile
     networks:
       - mynetwork
     volumes:
@@ -57,7 +57,7 @@ services:
     restart: always
     build: 
       context: ../order
-      dockerfile: Dockerfile
+      dockerfile: DockerFile
     networks:
       - mynetwork
     volumes:
@@ -71,7 +71,7 @@ services:
   nginx:
     build: 
       context: .
-      dockerfile: Dockerfile
+      dockerfile: DockerFile
     ports:
       - 80:80
     depends_on:
