@@ -60,13 +60,13 @@ Spring framework provides set of libraries for creating micro services in Java.
 
 #### Start the containers
 
-- ```docker run -d -it --net=mynetwork --name es -p 9200:9200 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.5.1```
+- ```docker run -d -it --net=micro_mynetwork --name es -p 9200:9200 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.5.1```
 
-- ```docker run -d -it --net=mynetwork --name kibanak --link es:elasticsearch -p 5601:5601 docker.elastic.co/kibana/kibana:6.5.2```
+- ```docker run -d -it --net=micro_mynetwork --name kibanak --link es:elasticsearch -p 5601:5601 docker.elastic.co/kibana/kibana:6.5.2```
 
   - here we need to link kibana with elastic search
 
-- ```docker run -d -it --net=mynetwork --name logm -p 5044:5044 -vvv -e xpack.monitoring.enabled=true -e xpack.monitoring.elasticsearch.hosts=192.168.99.100:9200 docker.elastic.co/logstash/logstash:6.5.2```
+- ```docker run -d -it --net=micro_mynetwork --name logm -p 5044:5044 -vvv -e xpack.monitoring.enabled=true -e xpack.monitoring.elasticsearch.hosts=192.168.99.100:9200 docker.elastic.co/logstash/logstash:6.5.2```
 
   - important thing to note here is that xpack monitoring should be enabled and xpack host should be elastic server
   - we also need to make sure that **logstash.conf** should be present in **(/usr/share/logstash/pipeline)** location with following content
@@ -92,7 +92,7 @@ Spring framework provides set of libraries for creating micro services in Java.
     ```
     logstash is accepting beat input in 5044 and it send the events to elastic search
   
-- ```docker run -d -it --net=mynetwork --name filebeatms -p 12201:12201 -v /tmp:/usr/share/filebeat/logs/ docker.elastic.co/beats/filebeat:6.5.4```
+- ```docker run -d -it --net=micro_mynetwork --name filebeatms -p 12201:12201 -v /tmp:/usr/share/filebeat/logs/ docker.elastic.co/beats/filebeat:6.5.4```
 
   - here we need to mount the volume, so that container's and filebeat share the same location
   - we needto make sure this file is present (**filebeat.yml**) location:- **/usr/share/filebeat**
